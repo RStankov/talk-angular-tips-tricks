@@ -18,10 +18,22 @@ app.service('Product', function(_) {
   };
 
   this.save = function(object, fn) {
-    if (!object.name || !object.price) {
-      return;
+    delete object.$errors;
+
+    var errors = {}
+
+    if (!object.name) {
+      errors.name = "can't be blank";
     }
 
+    if (!object.price) {
+      errors.price = "can't be blank";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      object.$errors = errors;
+      return;
+    }
     if (!object.id) {
       object.id = + new Date();
       products.push(object);
