@@ -48,8 +48,8 @@ app.service('Product', function(_) {
     return _.find(products, function(p) { return p.id == id });
   };
 
-  this.destroy = function(id, fn) {
-    products = _.remove(function(p) { return p.id == id });
+  this.destroy = function(object, fn) {
+    _.remove(products, function(p) { return p.id == object.id });
     fn();
   };
 });
