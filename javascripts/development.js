@@ -1,4 +1,6 @@
 app.invoke = function(fn) {
-  var element = angular.element('[ng-app="' + this.name + '"]');
+  var dom = document.querySelector('[ng-app="' + this.name + '"]'),
+      element = angular.element(dom);
+
   return element.injector().invoke(fn);
 }
